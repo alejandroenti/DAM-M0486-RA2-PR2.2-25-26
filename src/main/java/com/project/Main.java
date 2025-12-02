@@ -1,8 +1,6 @@
 package com.project;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Main {
    public static void main(String[] args) {
@@ -16,7 +14,7 @@ public class Main {
        }
 
         // Inicialitzem la connexió amb Hibernate
-        Manager.createSessionFactory();
+        /*Manager.createSessionFactory();
 
         // CREATE - Creem les ciutats
         Ciutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", 98661);
@@ -98,6 +96,6 @@ public class Main {
         }
 
         // Tanquem la connexió amb Hibernate
-        Manager.close();
+        Manager.close();*/
    }
 }
