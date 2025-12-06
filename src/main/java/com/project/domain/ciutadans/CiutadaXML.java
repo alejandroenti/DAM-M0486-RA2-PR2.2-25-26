@@ -7,74 +7,74 @@ import com.project.domain.ciutats.ICiutat;
 
 public class CiutadaXML implements ICiutada, Serializable{
 
-    private long _ciutadaId;
-    private String _nom;
-    private String _cognom;
-    private int _edat;
-    private ICiutat _ciutat;
+    private long ciutadaId;
+    private String nom;
+    private String cognom;
+    private int edat;
+    private ICiutat ciutat;
 
     public CiutadaXML() {}
 
     public CiutadaXML(String nom, String cognom, int edat) {
-        _nom = nom;
-        _cognom = cognom;
-        _edat = edat;
+        this.nom = nom;
+        this.cognom = cognom;
+        this.edat = edat;
     }
 
     @Override
     public long getCiutadaId() {
-        return _ciutadaId;
+        return ciutadaId;
     }
 
     @Override
     public void setCiutadaId(long ciutadaId) {
-        _ciutadaId = ciutadaId;
+        this.ciutadaId = ciutadaId;
     }
 
     @Override
     public String getNom() {
-        return _nom;
+        return nom;
     }
 
     @Override
     public void setNom(String nom) {
-        _nom = nom;
+        this.nom = nom;
     }
 
     @Override
     public String getCognom() {
-        return _cognom;
+        return cognom;
     }
 
     @Override
     public void setCognom(String cognom) {
-        _cognom = cognom;
+        this.cognom = cognom;
     }
 
     @Override
     public int getEdat() {
-        return _edat;
+        return edat;
     }
 
     @Override
     public void setEdat(int edat) {
-        _edat = edat;
+        this.edat = edat;
     }
 
     @Override
     public ICiutat getCiutat() {
-        return _ciutat;
+        return ciutat;
     }
 
     @Override
     public void setCiutat(ICiutat ciutat) {
-        _ciutat = ciutat;
+        this.ciutat = ciutat;
     }
 
 
     @Override
     public String toString() {
-        return String.format("%s %s (%d anys)", _nom, _cognom, _edat);
+        return String.format("%s %s (%d anys)", nom, cognom, edat);
         // Tony Updated Happy (20 anys)
     }
 
@@ -83,12 +83,12 @@ public class CiutadaXML implements ICiutada, Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ICiutada ciutada = (ICiutada) o;
-        if (_ciutadaId == 0 || ciutada.getCiutadaId() == 0) return this == ciutada;
-        return _ciutadaId == ciutada.getCiutadaId();
+        if (ciutadaId == 0 || ciutada.getCiutadaId() == 0) return this == ciutada;
+        return ciutadaId == ciutada.getCiutadaId();
     }
     
     @Override
     public int hashCode() {
-        return (_ciutadaId > 0) ? Objects.hash(_ciutadaId) : super.hashCode();
+        return (ciutadaId > 0) ? Objects.hash(ciutadaId) : super.hashCode();
     } 
 }

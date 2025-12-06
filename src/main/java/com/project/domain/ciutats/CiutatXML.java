@@ -10,78 +10,78 @@ import com.project.domain.ciutadans.ICiutada;
 
 public class CiutatXML implements ICiutat, Serializable {
 
-    private long _ciutatId;
-    private String _nom;
-    private String _pais;
-    private int _poblacio;
-    private Set<ICiutada> _ciutandans = new HashSet<>();
+    private long ciutatId;
+    private String nom;
+    private String pais;
+    private int poblacio;
+    private Set<ICiutada> ciutandans = new HashSet<>();
 
     public CiutatXML() {}
 
     public CiutatXML(String nom, String pais, int poblacio) {
-        _nom = nom;
-        _pais = pais;
-        _poblacio = poblacio;
+        this.nom = nom;
+        this.pais = pais;
+        this.poblacio = poblacio;
     }
 
     @Override
     public long getCiutatId() {
-        return _ciutatId;
+        return ciutatId;
     }
 
     @Override
     public void setCiutatId(long ciutatId) {
-        _ciutatId = ciutatId;
+        this.ciutatId = ciutatId;
     }
 
     @Override
     public String getNom() {
-        return _nom;
+        return nom;
     }
 
     @Override
     public void setNom(String nom) {
-        _nom = nom;
+        this.nom = nom;
     }
 
     @Override
     public String getPais() {
-        return _pais;
+        return pais;
     }
 
     @Override
     public void setPais(String pais) {
-        _pais = pais;
+        this.pais = pais;
     }
 
     @Override
     public int getPoblacio() {
-        return _poblacio;
+        return poblacio;
     }
 
     @Override
     public void setPoblacio(int poblacio) {
-        _poblacio = poblacio;
+        this.poblacio = poblacio;
     }
 
     @Override
     public Set<ICiutada> getCiutadans() {
-        return _ciutandans;
+        return ciutandans;
     }
 
     @Override
     public void setCiutadans(Set<ICiutada> ciutadans) {
-        _ciutandans = ciutadans;
+        this.ciutandans = ciutadans;
     }
 
     @Override
     public void addCiutada(ICiutada ciutada) {
-        _ciutandans.add(ciutada);
+        ciutandans.add(ciutada);
     }
     
     @Override
     public void removeCiutada(ICiutada ciutada) {
-        _ciutandans.remove(ciutada);
+        ciutandans.remove(ciutada);
     }  
 
 
@@ -89,13 +89,13 @@ public class CiutatXML implements ICiutat, Serializable {
     public String toString() {
         String llistaCiutadans = "[]";
         
-        if (_ciutandans != null && !_ciutandans.isEmpty()) {
-            llistaCiutadans = _ciutandans.stream()
+        if (ciutandans != null && !ciutandans.isEmpty()) {
+            llistaCiutadans = ciutandans.stream()
                 .map(ICiutada::getNom)
                 .collect(Collectors.joining(", ", "[", "]"));
         }
 
-        return String.format("%s (%s), Població: %d, Ciutadans: %s", _nom, _pais, _poblacio, llistaCiutadans);
+        return String.format("%s (%s), Població: %d, Ciutadans: %s", nom, pais, poblacio, llistaCiutadans);
     }
     
     /**
@@ -108,8 +108,8 @@ public class CiutatXML implements ICiutat, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ICiutat ciutat = (CiutatXML) o;
-        if (_ciutatId == 0 || ciutat.getCiutatId() == 0) return this == ciutat;
-        return _ciutatId == ciutat.getCiutatId();
+        if (ciutatId == 0 || ciutat.getCiutatId() == 0) return this == ciutat;
+        return ciutatId == ciutat.getCiutatId();
     }
     
     /**
@@ -119,6 +119,6 @@ public class CiutatXML implements ICiutat, Serializable {
      */
     @Override
     public int hashCode() {
-        return (_ciutatId > 0) ? Objects.hash(_ciutatId) : super.hashCode();
+        return (ciutatId > 0) ? Objects.hash(ciutatId) : super.hashCode();
     }  
 }

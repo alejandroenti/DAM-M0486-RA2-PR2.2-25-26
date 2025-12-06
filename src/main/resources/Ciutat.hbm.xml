@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 <hibernate-mapping>
     <class name="com.project.domain.ciutats.CiutatXML" table="ciutats">
-        <id name="_ciutatId" type="long" column="ciutatId">
+        <id name="ciutatId" type="long" column="ciutatId">
             <generator class="native"/>
         </id>
 
-        <property name = "_nom" column = "nom" type = "string"/>
-        <property name = "_pais" column = "pais" type = "string"/>
-        <property name = "_poblacio" column = "poblacio" type = "int"/>
+        <property name = "nom" column = "nom" type = "string"/>
+        <property name = "pais" column = "pais" type = "string"/>
+        <property name = "poblacio" column = "poblacio" type = "int"/>
 
-        <set name="_ciutadans" cascade="none" lazy="false" inverse="true">
+        <set name="ciutadans" cascade="none" lazy="false" inverse="true">
             <key column="ciutadaId"/>
             <one-to-many class="com.project.domain.ciutadans.CiutadaXML"/>
         </set>
