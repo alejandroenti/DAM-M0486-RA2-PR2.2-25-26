@@ -43,8 +43,8 @@ public class Main {
 
         // READ - Mostrem tots els elements creats
         System.out.println("Punt 1: Després de la creació inicial d'elements");
-        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
-        System.out.println(Manager.collectionToString(ICiutada.class, Manager.listCollection(ICiutada.class, "")));*/
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // Creem un set de ciutadans per la primera ciutat
         Set<ICiutada> ciutadansCity1 = new HashSet<ICiutada>();
@@ -65,8 +65,8 @@ public class Main {
 
         // READ - Mostrem l'estat després d'assignar ciutadans a les ciutats
         System.out.println("Punt 2: Després d'actualitzar ciutats");
-        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // UPDATE - Actualitzem els noms de les ciutats
         Manager.updateCiutat(refCiutat1.getCiutatId(), "Vancouver Updated", refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
@@ -78,8 +78,8 @@ public class Main {
 
         // READ - Mostrem l'estat després d'actualitzar els noms
         System.out.println("Punt 3: Després d'actualització de noms");
-        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // DELETE - Esborrem la tercera ciutat i el sisè ciutadà
         Manager.delete(ICiutat.class, refCiutat3.getCiutatId());
@@ -87,8 +87,8 @@ public class Main {
 
         // READ - Mostrem l'estat després d'esborrar elements
         System.out.println("Punt 4: després d'esborrat");
-        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // READ - Exemple de com recuperar i mostrar els ciutadans d'una ciutat específica
         System.out.println("Punt 5: Recuperació de ciutadans d'una ciutat específica");
