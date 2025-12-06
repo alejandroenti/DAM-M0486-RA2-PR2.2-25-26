@@ -16,5 +16,6 @@ public interface ICiutat {
     public void setPoblacio(int poblacio);
     public Set<ICiutada> getCiutadans();
     public void setCiutadans(Set<ICiutada> ciutadans);
-    public void add(ICiutada ciutada);
+    public void addCiutada(ICiutada ciutada);
+    public void removeCiutada(ICiutada ciutada);
 }

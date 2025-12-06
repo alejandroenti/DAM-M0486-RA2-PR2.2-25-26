@@ -75,10 +75,15 @@ public class CiutatXML implements ICiutat, Serializable {
     }
 
     @Override
-    public void add(ICiutada ciutada) {
+    public void addCiutada(ICiutada ciutada) {
         _ciutandans.add(ciutada);
     }
     
+    @Override
+    public void removeCiutada(ICiutada ciutada) {
+        _ciutandans.remove(ciutada);
+    }  
+
 
      @Override
     public String toString() {
@@ -115,5 +120,5 @@ public class CiutatXML implements ICiutat, Serializable {
     @Override
     public int hashCode() {
         return (_ciutatId > 0) ? Objects.hash(_ciutatId) : super.hashCode();
-    }    
+    }  
 }

@@ -1,8 +1,18 @@
 package com.project;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.project.application.factories.FactoryXML;
+import com.project.domain.ciutadans.ICiutada;
+import com.project.domain.ciutats.ICiutat;
+import com.project.domain.factories.IFactory;
 
 public class Main {
+
+    public static IFactory factory;
+
    public static void main(String[] args) {
        // Creem el directori data si no existeix
        String basePath = System.getProperty("user.dir") + "/data/";
@@ -13,29 +23,31 @@ public class Main {
            }
        }
 
+       factory = new FactoryXML();
+
         // Inicialitzem la connexió amb Hibernate
-        /*Manager.createSessionFactory();
+        Manager.createSessionFactory();
 
         // CREATE - Creem les ciutats
-        Ciutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", 98661);
-        Ciutat refCiutat2 = Manager.addCiutat("Växjö", "Suècia", 35220);
-        Ciutat refCiutat3 = Manager.addCiutat("Kyoto", "Japó", 5200461);
+        ICiutat refCiutat1 = Manager.addCiutat("Vancouver", "Canada", 98661);
+        ICiutat refCiutat2 = Manager.addCiutat("Växjö", "Suècia", 35220);
+        ICiutat refCiutat3 = Manager.addCiutat("Kyoto", "Japó", 5200461);
 
         // CREATE - Creem els ciutadans
-        Ciutada refCiutada1 = Manager.addCiutada("Tony", "Happy", 20);
-        Ciutada refCiutada2 = Manager.addCiutada("Monica", "Mouse", 22);
-        Ciutada refCiutada3 = Manager.addCiutada("Eirika", "Erjo", 44);
-        Ciutada refCiutada4 = Manager.addCiutada("Ven", "Enrison", 48);
-        Ciutada refCiutada5 = Manager.addCiutada("Akira", "Akiko", 62);
-        Ciutada refCiutada6 = Manager.addCiutada("Masako", "Kubo", 66);
+        ICiutada refCiutada1 = Manager.addCiutada("Tony", "Happy", 20);
+        ICiutada refCiutada2 = Manager.addCiutada("Monica", "Mouse", 22);
+        ICiutada refCiutada3 = Manager.addCiutada("Eirika", "Erjo", 44);
+        ICiutada refCiutada4 = Manager.addCiutada("Ven", "Enrison", 48);
+        ICiutada refCiutada5 = Manager.addCiutada("Akira", "Akiko", 62);
+        ICiutada refCiutada6 = Manager.addCiutada("Masako", "Kubo", 66);
 
         // READ - Mostrem tots els elements creats
         System.out.println("Punt 1: Després de la creació inicial d'elements");
-        System.out.println(Manager.collectionToString(Ciutat.class, Manager.listCollection(Ciutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));
+        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(ICiutada.class, Manager.listCollection(ICiutada.class, "")));*/
 
         // Creem un set de ciutadans per la primera ciutat
-        Set<Ciutada> ciutadansCity1 = new HashSet<Ciutada>();
+        Set<ICiutada> ciutadansCity1 = new HashSet<ICiutada>();
         ciutadansCity1.add(refCiutada1);
         ciutadansCity1.add(refCiutada2);
         ciutadansCity1.add(refCiutada3);
@@ -44,7 +56,7 @@ public class Main {
         Manager.updateCiutat(refCiutat1.getCiutatId(), refCiutat1.getNom(), refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
 
         // Creem un set de ciutadans per la segona ciutat
-        Set<Ciutada> ciutadansCity2 = new HashSet<Ciutada>();
+        Set<ICiutada> ciutadansCity2 = new HashSet<ICiutada>();
         ciutadansCity2.add(refCiutada4);
         ciutadansCity2.add(refCiutada5);
 
@@ -53,8 +65,8 @@ public class Main {
 
         // READ - Mostrem l'estat després d'assignar ciutadans a les ciutats
         System.out.println("Punt 2: Després d'actualitzar ciutats");
-        System.out.println(Manager.collectionToString(Ciutat.class, Manager.listCollection(Ciutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));
+        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
 
         // UPDATE - Actualitzem els noms de les ciutats
         Manager.updateCiutat(refCiutat1.getCiutatId(), "Vancouver Updated", refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
@@ -66,26 +78,26 @@ public class Main {
 
         // READ - Mostrem l'estat després d'actualitzar els noms
         System.out.println("Punt 3: Després d'actualització de noms");
-        System.out.println(Manager.collectionToString(Ciutat.class, Manager.listCollection(Ciutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));
+        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
 
         // DELETE - Esborrem la tercera ciutat i el sisè ciutadà
-        Manager.delete(Ciutat.class, refCiutat3.getCiutatId());
-        Manager.delete(Ciutada.class, refCiutada6.getCiutadaId());
+        Manager.delete(ICiutat.class, refCiutat3.getCiutatId());
+        Manager.delete(ICiutada.class, refCiutada6.getCiutadaId());
 
         // READ - Mostrem l'estat després d'esborrar elements
         System.out.println("Punt 4: després d'esborrat");
-        System.out.println(Manager.collectionToString(Ciutat.class, Manager.listCollection(Ciutat.class, "")));
-        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));
+        /*System.out.println(Manager.collectionToString(ICiutat.class, Manager.listCollection(ICiutat.class, "")));
+        System.out.println(Manager.collectionToString(Ciutada.class, Manager.listCollection(Ciutada.class, "")));*/
 
         // READ - Exemple de com recuperar i mostrar els ciutadans d'una ciutat específica
         System.out.println("Punt 5: Recuperació de ciutadans d'una ciutat específica");
-        Ciutat ciutat = Manager.getCiutatWithCiutadans(refCiutat1.getCiutatId());
+        ICiutat ciutat = Manager.getCiutatWithCiutadans(refCiutat1.getCiutatId());
         if (ciutat != null) {
             System.out.println("Ciutadans de la ciutat '" + ciutat.getNom() + "':");
-            Set<Ciutada> ciutadans = ciutat.getCiutadans();
+            Set<ICiutada> ciutadans = ciutat.getCiutadans();
             if (ciutadans != null && !ciutadans.isEmpty()) {
-                for (Ciutada ciutada : ciutadans) {
+                for (ICiutada ciutada : ciutadans) {
                     System.out.println("- " + ciutada.getNom() + " " + ciutada.getCognom());
                 }
             } else {
@@ -96,6 +108,6 @@ public class Main {
         }
 
         // Tanquem la connexió amb Hibernate
-        Manager.close();*/
+        Manager.close();
    }
 }

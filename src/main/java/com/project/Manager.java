@@ -7,11 +7,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 
@@ -73,71 +73,70 @@ public class Manager {
     // ============================================================
 
     public static ICiutat addCiutat(String nom, String pais, int poblacio) {
-        /*return executeInTransactionWithResult(session -> {
-            Cart cart = new Cart(type);
-            session.persist(cart);
-            return cart;
-        });*/
-        return null;
+        return executeInTransactionWithResult(session -> {
+            ICiutat ciutat = Main.factory.createCiutat(nom, pais, poblacio);
+            session.persist(ciutat);
+            return ciutat;
+        });
     }
 
     public static ICiutada addCiutada(String nom, String cognom, int edat) {
-        /*return executeInTransactionWithResult(session -> {
-            Item item = new Item(name);
-            session.persist(item);
-            return item;
-        });*/
-        return null;
+        return executeInTransactionWithResult(session -> {
+            ICiutada ciutada = Main.factory.createCiutada(nom, cognom, edat);
+            session.persist(ciutada);
+            return ciutada;
+        });
     }
 
     public static void updateCiutada(long ciutadaId, String name, String cognom, int edat) {
-        /*executeInTransaction(session -> {
-            Item item = session.get(Item.class, itemId);
-            if (item != null) {
-                item.setName(name);
-                session.merge(item);
+        executeInTransaction(session -> {
+            ICiutada ciutada = session.get(ICiutada.class, ciutadaId);
+            if (ciutada != null) {
+                ciutada.setNom(name);
+                session.merge(ciutada);
             }
-        });*/
+        });
     }
 
-    public static void updateCiutat(long ciutatId, String name, String pais, int poblacio, Set<Item> nouCiutadans) {
-        /*executeInTransaction(session -> {
-            Cart cart = session.get(Cart.class, cartId);
-            if (cart == null) return;
+    public static void updateCiutat(long ciutatId, String nom, String pais, int poblacio, Set<ICiutada> nouCiutadans) {
+        executeInTransaction(session -> {
+            ICiutat ciutat = session.get(ICiutat.class, ciutatId);
+            if (ciutat == null) return;
             
-            cart.setType(type);
+            ciutat.setNom(nom);
+            ciutat.setPais(pais);
+            ciutat.setPoblacio(poblacio);
             
-            // Si newItems és null, no toquem les relacions existents
-            if (newItems != null) {
+            // Si nouCiutadans és null, no toquem les relacions existents
+            if (nouCiutadans != null) {
 
-                // 1. Netejar items existents
-                if (cart.getItems() != null && !cart.getItems().isEmpty()) {
-                    List<Item> itemsToRemove = List.copyOf(cart.getItems());
-                    itemsToRemove.forEach(cart::removeItem);
+                // 1. Netejar ciutadans existents
+                if (ciutat.getCiutadans() != null && !ciutat.getCiutadans().isEmpty()) {
+                    List<ICiutada> ciutadansToRemove = List.copyOf(ciutat.getCiutadans());
+                    ciutadansToRemove.forEach(ciutat::removeCiutada);
                 }
 
-                // 2. Afegir nous items (recuperant-los com a "managed")
-                for (Item item : newItems) {
-                    Item managedItem = session.get(Item.class, item.getItemId());
-                    if (managedItem != null) {
-                        cart.addItem(managedItem);
+                // 2. Afegir nous ciutanads (recuperant-los com a "managed")
+                for (ICiutada ciutada : nouCiutadans) {
+                    ICiutada managedCiutada = session.get(ICiutada.class, ciutada.getCiutadaId());
+                    if (managedCiutada != null) {
+                        ciutat.addCiutada(ciutada);
                     }
                 }
             }
 
-            session.merge(cart);
-        });*/
+            session.merge(ciutat);
+        });
     }
 
     public static ICiutat getCiutatWithCiutadans(long ciutatId) {
-        /*return executeInTransactionWithResult(session -> {
-            Cart cart = session.get(Cart.class, cartId);
-            if (cart != null) {
-                Hibernate.initialize(cart.getItems());
+        return executeInTransactionWithResult(session -> {
+            ICiutat ciutat = session.get(ICiutat.class, ciutatId);
+            if (ciutat != null) {
+                Hibernate.initialize(ciutat.getCiutadans());
             }
-            return cart;
-        });*/
-        return null;
+            return ciutat;
+        });
     }
 
     public static <T> T getById(Class<T> clazz, long id) {
