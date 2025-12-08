@@ -14,4 +14,5 @@ public interface ICiutada {
     public void setEdat(int edat);
     public ICiutat getCiutat();
     public void setCiutat(ICiutat ciutat);
+    public String getFullName();
 }

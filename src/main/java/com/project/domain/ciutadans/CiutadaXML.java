@@ -71,12 +71,16 @@ public class CiutadaXML implements ICiutada, Serializable{
         this.ciutat = ciutat;
     }
 
+     @Override
+    public String getFullName() {
+        return String.format("%s %s", nom, cognom);
+    } 
 
     @Override
     public String toString() {
         return String.format("%s %s (%d anys)", nom, cognom, edat);
-        // Tony Updated Happy (20 anys)
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -90,5 +94,5 @@ public class CiutadaXML implements ICiutada, Serializable{
     @Override
     public int hashCode() {
         return (ciutadaId > 0) ? Objects.hash(ciutadaId) : super.hashCode();
-    } 
+    }
 }
