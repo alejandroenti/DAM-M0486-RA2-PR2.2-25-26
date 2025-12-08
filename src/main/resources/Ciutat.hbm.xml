@@ -11,7 +11,7 @@
         <property name = "poblacio" column = "poblacio" type = "int"/>
 
         <set name="ciutadans" cascade="none" lazy="false" inverse="true">
-            <key column="ciutadaId"/>
+            <key column="ciutatId"/>
             <one-to-many class="com.project.domain.ciutadans.CiutadaXML"/>
         </set>
     </class>
