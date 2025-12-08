@@ -135,7 +135,8 @@ public class Manager {
 
     public static ICiutat getCiutatWithCiutadans(long ciutatId) {
         return executeInTransactionWithResult(session -> {
-            ICiutat ciutat = session.get(ICiutat.class, ciutatId);
+            Class<? extends ICiutat> clazz = Main.factory.getCiutatClass();
+            ICiutat ciutat = session.get(clazz, ciutatId);
             if (ciutat != null) {
                 Hibernate.initialize(ciutat.getCiutadans());
             }
