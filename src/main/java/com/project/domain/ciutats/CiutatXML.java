@@ -91,7 +91,7 @@ public class CiutatXML implements ICiutat, Serializable {
         
         if (ciutandans != null && !ciutandans.isEmpty()) {
             llistaCiutadans = ciutandans.stream()
-                .map(ICiutada::getNom)
+                .map(ICiutada::getFullName)
                 .collect(Collectors.joining(", ", "[", "]"));
         }
 
