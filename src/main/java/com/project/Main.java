@@ -47,7 +47,7 @@ public class Main {
         System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // Creem un set de ciutadans per la primera ciutat
-        Set<ICiutada> ciutadansCity1 = new HashSet<ICiutada>();
+        Set<ICiutada> ciutadansCity1 = new HashSet<>();
         ciutadansCity1.add(refCiutada1);
         ciutadansCity1.add(refCiutada2);
         ciutadansCity1.add(refCiutada3);
@@ -56,7 +56,7 @@ public class Main {
         Manager.updateCiutat(refCiutat1.getCiutatId(), refCiutat1.getNom(), refCiutat1.getPais(), refCiutat1.getPoblacio(), ciutadansCity1);
 
         // Creem un set de ciutadans per la segona ciutat
-        Set<ICiutada> ciutadansCity2 = new HashSet<ICiutada>();
+        Set<ICiutada> ciutadansCity2 = new HashSet<>();
         ciutadansCity2.add(refCiutada4);
         ciutadansCity2.add(refCiutada5);
 

@@ -90,7 +90,8 @@ public class Manager {
 
     public static void updateCiutada(long ciutadaId, String name, String cognom, int edat) {
         executeInTransaction(session -> {
-            ICiutada ciutada = session.get(ICiutada.class, ciutadaId);
+            Class<? extends ICiutada> clazz = Main.factory.getCiutadaClass();
+            ICiutada ciutada = session.get(clazz, ciutadaId);
             if (ciutada != null) {
                 ciutada.setNom(name);
                 session.merge(ciutada);
@@ -100,7 +101,8 @@ public class Manager {
 
     public static void updateCiutat(long ciutatId, String nom, String pais, int poblacio, Set<ICiutada> nouCiutadans) {
         executeInTransaction(session -> {
-            ICiutat ciutat = session.get(ICiutat.class, ciutatId);
+            Class<? extends ICiutat> clazz = Main.factory.getCiutatClass();
+            ICiutat ciutat = session.get(clazz, ciutatId);
             if (ciutat == null) return;
             
             ciutat.setNom(nom);
@@ -118,9 +120,11 @@ public class Manager {
 
                 // 2. Afegir nous ciutanads (recuperant-los com a "managed")
                 for (ICiutada ciutada : nouCiutadans) {
-                    ICiutada managedCiutada = session.get(ICiutada.class, ciutada.getCiutadaId());
+                    Class<? extends ICiutada> clazzz = Main.factory.getCiutadaClass();
+                    ICiutada managedCiutada = session.get(clazzz, ciutada.getCiutadaId());
                     if (managedCiutada != null) {
-                        ciutat.addCiutada(ciutada);
+                        managedCiutada.setCiutat(ciutat);
+                        ciutat.addCiutada(managedCiutada);
                     }
                 }
             }
