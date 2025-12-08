@@ -1,8 +1,11 @@
 package com.project;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -12,10 +15,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 
+import com.project.domain.ciutadans.CiutadaJPA;
 import com.project.domain.ciutadans.ICiutada;
+import com.project.domain.ciutats.CiutatJPA;
 import com.project.domain.ciutats.ICiutat;
 
 public class Manager {
@@ -27,11 +34,47 @@ public class Manager {
     // ============================================================
 
     public static void createSessionFactory() {
-        try {
-            _factory = new Configuration().configure().buildSessionFactory();
-        } catch (HibernateException ex) { 
-            System.err.println("Failed to create sessionFactory object." + ex);
-            throw new ExceptionInInitializerError(ex); 
+
+        System.out.println(Main.factory.getClass().getName());
+        if (Main.factory.getClass().getName().contains("FactoryXML")) {
+            try {
+                _factory = new Configuration().configure().buildSessionFactory();
+            } catch (HibernateException ex) { 
+                System.err.println("Failed to create sessionFactory object." + ex);
+                throw new ExceptionInInitializerError(ex); 
+            }
+        }
+        else if (Main.factory.getClass().getName().contains("FactoryJPA")) {
+             try {
+                // CONFIGURATION: Configura Hibernate programàticament
+                Configuration configuration = new Configuration();
+                
+                // Registrem les classes @Entity que Hibernate ha de gestionar
+                configuration.addAnnotatedClass(CiutatJPA.class);
+                configuration.addAnnotatedClass(CiutadaJPA.class);
+
+                // Carreguem les propietats des del fitxer (URL BBDD, usuari, contrasenya...)
+                Properties properties = new Properties();
+                try (InputStream input = Manager.class.getClassLoader().getResourceAsStream("hibernate.properties")) {
+                    if (input == null) {
+                        throw new IOException("No s'ha pogut trobar " + "hibernate.properties");
+                    }
+                    properties.load(input);
+                }
+                configuration.addProperties(properties);
+                
+                // SERVICE REGISTRY: Gestiona els serveis interns d'Hibernate
+                StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties())
+                    .build();
+                    
+                // Construïm el SessionFactory (operació costosa, només es fa un cop)
+                _factory = configuration.buildSessionFactory(serviceRegistry);
+                
+            } catch (Throwable ex) { 
+                System.err.println("Error en crear sessionFactory: " + ex);
+                throw new ExceptionInInitializerError(ex); 
+            }
         }
     }
 
