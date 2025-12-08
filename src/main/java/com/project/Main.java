@@ -42,7 +42,7 @@ public class Main {
         ICiutada refCiutada6 = Manager.addCiutada("Masako", "Kubo", 66);
 
         // READ - Mostrem tots els elements creats
-        System.out.println("Punt 1: Després de la creació inicial d'elements");
+        System.out.println("\n\nPunt 1: Després de la creació inicial d'elements");
         System.out.println(Manager.collectionToString(Manager.listCollection(ICiutat.class, "")));
         System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
