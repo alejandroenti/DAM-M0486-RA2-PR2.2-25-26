@@ -82,8 +82,8 @@ public class Main {
         System.out.println(Manager.collectionToString(Manager.listCollection(ICiutada.class, "")));
 
         // DELETE - Esborrem la tercera ciutat i el sisè ciutadà
-        Manager.delete(ICiutat.class, refCiutat3.getCiutatId());
-        Manager.delete(ICiutada.class, refCiutada6.getCiutadaId());
+        Manager.delete(factory.getCiutatClass(), refCiutat3.getCiutatId());
+        Manager.delete(factory.getCiutadaClass(), refCiutada6.getCiutadaId());
 
         // READ - Mostrem l'estat després d'esborrar elements
         System.out.println("Punt 4: després d'esborrat");
