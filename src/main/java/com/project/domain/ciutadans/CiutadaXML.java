@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import com.project.domain.ciutats.ICiutat;
 
-public class CiutadaXML implements ICiutada, Serializable{
+public class CiutadaXML implements ICiutada, Serializable {
 
     private long ciutadaId;
     private String nom;
