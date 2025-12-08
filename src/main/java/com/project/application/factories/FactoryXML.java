@@ -18,4 +18,13 @@ public class FactoryXML implements IFactory {
         return new CiutadaXML(nom, cognom, edat);
     }
 
+    @Override
+    public Class<? extends ICiutat> getCiutatClass() {
+        return CiutatXML.class;
+    }
+
+    @Override
+    public Class<? extends ICiutada> getCiutadaClass() {
+        return CiutadaXML.class;
+    }
 }

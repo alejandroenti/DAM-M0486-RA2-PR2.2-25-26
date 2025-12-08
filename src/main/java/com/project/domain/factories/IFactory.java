@@ -7,4 +7,6 @@ public interface IFactory {
 
     public ICiutat createCiutat(String nom, String pais, int poblacio);
     public ICiutada createCiutada(String nom, String cognom, int edat);
+    public Class<? extends ICiutat> getCiutatClass();
+    public Class<? extends ICiutada> getCiutadaClass();
 }
