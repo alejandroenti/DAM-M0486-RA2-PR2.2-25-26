@@ -2,8 +2,10 @@ package com.project;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
+import com.project.application.factories.FactoryJPA;
 import com.project.application.factories.FactoryXML;
 import com.project.domain.ciutadans.ICiutada;
 import com.project.domain.ciutats.ICiutat;
@@ -23,7 +25,7 @@ public class Main {
            }
        }
 
-       factory = new FactoryXML();
+       selectHibernateMode();
 
         // Inicialitzem la connexió amb Hibernate
         Manager.createSessionFactory();
@@ -109,5 +111,39 @@ public class Main {
 
         // Tanquem la connexió amb Hibernate
         Manager.close();
+   }
+
+   public static void selectHibernateMode() {
+        Boolean exit = false;
+        Scanner sc = new Scanner(System.in);
+
+        do { 
+            System.out.println("[*] Selecciona el mode d'Hibernate:\n - XML\n - JPA");
+            System.out.print("Escull una opció: [1-2]: ");
+
+            if (!sc.hasNextInt()) {
+                System.out.println("[!] ERROR: Has d'introduir un número\n\n");
+                sc.nextLine();
+                continue;
+            }
+
+            int option = sc.nextInt();
+
+            switch (option) {
+                case 1 -> {
+                    Main.factory = new FactoryXML();
+                    System.out.println("[*] Hibernate en mode XML activat.");
+                    exit = true;
+                }
+                case 2 -> {
+                    Main.factory = new FactoryJPA();
+                    System.out.println("[*] Hibernate en mode JPA activat.");
+                    exit = true;
+                }
+                default -> System.out.println("[!] ERROR: Opció no vàlida\n\n");
+            }
+        } while (!exit);
+
+        sc.close();
    }
 }
