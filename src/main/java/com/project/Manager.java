@@ -174,8 +174,10 @@ public class Manager {
     public static <T> String collectionToString(Collection<T> collection) {
         if (collection == null || collection.isEmpty()) return "[]";
         StringBuilder sb = new StringBuilder();
+        int counter = 1;
         for (T obj : collection) {
-            sb.append(obj.toString()).append("\n");
+            sb.append(String.format("%d: ", counter)).append(obj.toString()).append("\n");
+            counter++;
         }
         return sb.toString();
     }
