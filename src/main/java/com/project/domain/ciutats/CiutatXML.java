@@ -92,7 +92,7 @@ public class CiutatXML implements ICiutat, Serializable {
         if (ciutandans != null && !ciutandans.isEmpty()) {
             llistaCiutadans = ciutandans.stream()
                 .map(ICiutada::getFullName)
-                .collect(Collectors.joining(", ", "[", "]"));
+                .collect(Collectors.joining(" | ", "[", "]"));
         }
 
         return String.format("%s (%s), Població: %d, Ciutadans: %s", nom, pais, poblacio, llistaCiutadans);
